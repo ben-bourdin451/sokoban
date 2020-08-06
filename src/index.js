@@ -1,11 +1,13 @@
+import globals from './globals.js';
+import Player from './player.js';
 import '../static/css/style.css';
-import box from '../static/images/box.png';
+
 
 const FPS = 12;
-const TILE_W = 34;
-const TILE_H = 34;
-const numTilesX = 12;
-const numTilesY = 12;
+const TILE_W = globals.TILE_W;
+const TILE_H = globals.TILE_H;
+const numTilesX = globals.numTilesX;
+const numTilesY = globals.numTilesY;
 
 function createCanvas() {
 	let el = document.createElement('canvas');
@@ -18,12 +20,11 @@ function createCanvas() {
 
 document.body.appendChild(createCanvas());
 
-var screen = document.getElementById("screen");
-var ctx = screen.getContext("2d");
+let screen = document.getElementById("screen");
+let ctx = screen.getContext("2d");
 console.log(screen.width, screen.height);
 
-const boxImg = new Image(TILE_W, TILE_H);
-boxImg.src = box;
+let p = new Player(0,0);
 
 function main() {
 	window.addEventListener("keydown", event => {
@@ -34,7 +35,7 @@ function main() {
 	let loop = setInterval(() => {
 		// Draw	
 		ctx.clearRect(0, 0, screen.width, screen.height);
-		ctx.drawImage(boxImg, 0, 0);
+		p.draw(ctx);
 	}, 1 / FPS * 1000);
 }
 
