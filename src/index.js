@@ -26,17 +26,17 @@ console.log(screen.width, screen.height);
 
 let p = new Player(0,0);
 
-function main() {
-	window.addEventListener("keydown", event => {
-		// TODO: keypress handling
-		event.preventDefault();
-	});
-
-	let loop = setInterval(() => {
-		// Draw	
-		ctx.clearRect(0, 0, screen.width, screen.height);
-		p.draw(ctx);
-	}, 1 / FPS * 1000);
+function draw() {
+	ctx.clearRect(0, 0, screen.width, screen.height);
+	p.draw(ctx);
 }
 
-main();
+draw();
+
+window.addEventListener("keydown", e => {
+	p.handleKeyDown(e);
+	e.preventDefault();
+
+	draw();
+});
+

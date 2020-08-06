@@ -13,6 +13,7 @@ const direction = {
 
 const TILE_W = globals.TILE_W;
 const TILE_H = globals.TILE_H;
+const KEYS = globals.KEYS;
 
 export default class Player {
 	constructor(x, y) {
@@ -29,7 +30,42 @@ export default class Player {
 		this.sprites[direction.right].src = pright;
 		this.sprites[direction.down].src = pdown;
 		this.sprites[direction.left].src = pleft;
-		console.log(this.sprites[this.direction]);
+	}
+
+	move() {
+		switch (this.direction) {
+		case direction.up:
+			this.y -= TILE_H;
+			break;
+		case direction.right:
+			this.x += TILE_W;
+			break;
+		case direction.down:
+			this.y += TILE_H;
+			break;
+		case direction.left:
+			this.x -= TILE_W;
+			break;
+		}
+	}
+
+	handleKeyDown(e) {
+		switch (e.keyCode) {
+		case KEYS.ARROW_UP:
+			this.direction = direction.up;
+			break;
+		case KEYS.ARROW_RIGHT:
+			this.direction = direction.right;
+			break;
+		case KEYS.ARROW_DOWN:
+			this.direction = direction.down;
+			break;
+		case KEYS.ARROW_LEFT:
+			this.direction = direction.left;
+			break;
+		}
+
+		this.move();
 	}
 
 	draw(ctx) {
