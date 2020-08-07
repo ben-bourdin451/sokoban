@@ -1,4 +1,6 @@
-import {TILE_W, TILE_H, KEYS} from './globals.js';
+import {TILE_W, TILE_H, numTilesX, numTilesY, KEYS} from './globals.js';
+import {boundPos} from './geo.js';
+
 import pdown from "../static/images/mario_down.gif";
 import pleft from "../static/images/mario_left.gif";
 import pright from "../static/images/mario_right.gif";
@@ -43,6 +45,8 @@ export default class Player {
 			this.x -= TILE_W;
 			break;
 		}
+
+		[this.x, this.y] = boundPos(this.x, this.y);
 	}
 
 	handleKeyDown(e) {
