@@ -1,13 +1,9 @@
-import globals from './globals.js';
+import {TILE_W, TILE_H, numTilesX, numTilesY} from './globals.js';
 import Player from './player.js';
+import Box from './box.js';
 import '../static/css/style.css';
 
-
 const FPS = 12;
-const TILE_W = globals.TILE_W;
-const TILE_H = globals.TILE_H;
-const numTilesX = globals.numTilesX;
-const numTilesY = globals.numTilesY;
 
 function createCanvas() {
 	let el = document.createElement('canvas');
@@ -25,10 +21,11 @@ let ctx = screen.getContext("2d");
 console.log(screen.width, screen.height);
 
 let p = new Player(0,0);
-
+let b = new Box(TILE_W, TILE_H);
 function draw() {
 	ctx.clearRect(0, 0, screen.width, screen.height);
 	p.draw(ctx);
+	b.draw(ctx);
 }
 
 draw();

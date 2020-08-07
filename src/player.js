@@ -1,4 +1,4 @@
-import globals from './globals.js';
+import {TILE_W, TILE_H, KEYS} from './globals.js';
 import pdown from "../static/images/mario_down.gif";
 import pleft from "../static/images/mario_left.gif";
 import pright from "../static/images/mario_right.gif";
@@ -10,10 +10,6 @@ const direction = {
 	down: 2,
 	left: 3
 };
-
-const TILE_W = globals.TILE_W;
-const TILE_H = globals.TILE_H;
-const KEYS = globals.KEYS;
 
 export default class Player {
 	constructor(x, y) {
@@ -53,19 +49,21 @@ export default class Player {
 		switch (e.keyCode) {
 		case KEYS.ARROW_UP:
 			this.direction = direction.up;
+			this.move();
 			break;
 		case KEYS.ARROW_RIGHT:
 			this.direction = direction.right;
+			this.move();
 			break;
 		case KEYS.ARROW_DOWN:
 			this.direction = direction.down;
+			this.move();
 			break;
 		case KEYS.ARROW_LEFT:
 			this.direction = direction.left;
+			this.move();
 			break;
 		}
-
-		this.move();
 	}
 
 	draw(ctx) {
