@@ -1,5 +1,5 @@
 import * as g from './globals.js';
-import {boundPos} from './geo.js';
+import {nextPos} from './geo.js';
 
 import pdown from "../static/images/mario_down.gif";
 import pleft from "../static/images/mario_left.gif";
@@ -25,22 +25,11 @@ export default class Player {
 
 	move(direction) {
 		this.direction = direction;
-		switch (direction) {
-		case g.direction.up:
-			this.y -= g.TILE_H;
-			break;
-		case g.direction.right:
-			this.x += g.TILE_W;
-			break;
-		case g.direction.down:
-			this.y += g.TILE_H;
-			break;
-		case g.direction.left:
-			this.x -= g.TILE_W;
-			break;
-		}
+		[this.x, this.y] = this.nextPos(direction);
+	}
 
-		[this.x, this.y] = boundPos(this.x, this.y);
+	nextPos(direction) {
+		return nextPos(this.x, this.y, direction);
 	}
 
 	draw(ctx) {
