@@ -33,7 +33,7 @@ export default class Player {
 	}
 
 	draw(ctx) {
-		ctx.drawImage(this.sprites[this.direction], this.x, this.y, g.TILE_W, g.TILE_H);
+		ctx.drawImage(this.sprites[this.direction], this.x * g.TILE_W, this.y * g.TILE_H, g.TILE_W, g.TILE_H);
 	}
 };
 

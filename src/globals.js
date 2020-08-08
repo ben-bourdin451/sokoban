@@ -3,9 +3,13 @@ export const TILE_H = 34;
 export const numTilesX = 12;
 export const numTilesY = 12;
 
-export const tileType = {
-	box: 0,
-	wall: 1,
+export const tile = {
+	empty: 0,
+	box: 1,
+	boxOk: 2,
+	player: 3,
+	objective: 4,
+	wall: 5,
 };
 
 export const keyCodes = {
