@@ -66,7 +66,7 @@ class Game {
 		const [nx, ny] = this.player.nextPos(d);
 		const nt = this.tileMap[ny][nx];
 
-		if (nt.is(g.tile.empty)) {
+		if (nt.isTraversable()) {
 			this.player.move(d);
 		} else if (nt.isMoveable()) {
 			
@@ -74,9 +74,14 @@ class Game {
 			// todo: is nnp within bounds?
 			const [nnx, nny] = nextPos(nx, ny, d);
 			const nnt = this.tileMap[nny][nnx];
-			if (nnt.is(g.tile.empty)) {
-				this.tileMap[nny][nnx] = nt;
-				this.tileMap[ny][nx] = nnt;
+			if (nnt.isTraversable()) {
+
+				// moveable object is always eiter a box or a boxOk
+				this.tileMap[ny][nx] = nt.is(g.tile.box) ? new Tile(g.tile.empty) : new Tile(g.tile.objective);
+
+				// traversable is either empty or an objective
+				this.tileMap[nny][nnx] = nnt.is(g.tile.empty) ? new Tile(g.tile.box) : new Tile(g.tile.boxOk);
+
 				this.player.move(d);
 			}
 		}

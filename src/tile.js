@@ -13,7 +13,11 @@ export default class Tile {
 		return this.type === t;
 	}
 
+	isTraversable() {
+		return this.type === tile.objective || this.type === tile.empty;
+	}
+
 	isMoveable() {
-		return this.type == tile.box || this.type == tile.boxOk;
+		return this.type === tile.box || this.type === tile.boxOk;
 	}
 };
