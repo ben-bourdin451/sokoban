@@ -3,7 +3,7 @@ export const TILE_H = 34;
 export const numTilesX = 12;
 export const numTilesY = 12;
 
-export const KEYS = {
+export const keyCodes = {
 		RETURN: 13,
 		DELETE: 46,
 		ESCAPE: 27,
@@ -13,3 +13,11 @@ export const KEYS = {
 		ARROW_RIGHT: 39,
 		ARROW_DOWN: 40
 };
+
+export const direction = {
+	up: 0,
+	right: 1,
+	down: 2,
+	left: 3
+};
+
