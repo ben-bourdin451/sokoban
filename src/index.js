@@ -20,7 +20,7 @@ let screen = document.getElementById("screen");
 let ctx = screen.getContext("2d");
 console.log(screen.width, screen.height);
 
-game.loadLevel(1);
+game.loadLevel(2);
 
 window.addEventListener("keydown", e => {
 	let d;
