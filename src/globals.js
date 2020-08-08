@@ -4,14 +4,18 @@ export const numTilesX = 12;
 export const numTilesY = 12;
 
 export const keyCodes = {
-		RETURN: 13,
-		DELETE: 46,
-		ESCAPE: 27,
-		SPACEBAR: 32,
-		ARROW_LEFT: 37,
-		ARROW_UP: 38,
-		ARROW_RIGHT: 39,
-		ARROW_DOWN: 40
+	RETURN: 13,
+	DELETE: 46,
+	ESCAPE: 27,
+	SPACEBAR: 32,
+	ARROW_LEFT: 37,
+	ARROW_UP: 38,
+	ARROW_RIGHT: 39,
+	ARROW_DOWN: 40,
+	H: 72,
+	J: 74,
+	K: 75,
+	L: 76,
 };
 
 export const direction = {
