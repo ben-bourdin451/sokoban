@@ -1,4 +1,5 @@
 import {TILE_W, TILE_H, tileType} from './globals.js';
+import {nextPos} from './geo.js';
 import wall from '../static/images/wall.png';
 import box from '../static/images/box.png';
 
@@ -15,6 +16,14 @@ export default class Tile {
 		} else {
 			this.sprite.src = wall;
 		}
+	}
+
+	move(d) {
+		[this.x, this.y] = nextPos(this.x, this.y, d);
+	}
+
+	isMoveable() {
+		return this.type == tileType.box;
 	}
 
 	draw(ctx) {

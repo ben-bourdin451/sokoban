@@ -1,7 +1,7 @@
 import * as g from './globals.js';
 import Player from './player.js';
 import Tile from './tile.js';
-import {isColliding} from './geo.js';
+import {nextPos, isColliding} from './geo.js';
 
 import '../static/css/style.css';
 
@@ -79,6 +79,18 @@ window.addEventListener("keydown", e => {
 
 		if (c.length <= 0) {
 			p.move(d);
+		} else if (c.length == 1) {
+			let obj = c[0];
+
+			if (obj.isMoveable()) {
+				// check tile after next position
+				const [nnx, nny] = nextPos(nx, ny, d);
+				const nct = tiles.filter(t => isColliding(t.x, t.y, nnx, nny));
+				if (nct.length <=0) {
+					obj.move(d);
+					p.move(d);
+				}
+			}
 		}
 	}
 
