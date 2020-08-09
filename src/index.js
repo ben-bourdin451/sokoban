@@ -18,6 +18,7 @@ document.body.appendChild(createCanvas());
 
 let screen = document.getElementById("screen");
 let ctx = screen.getContext("2d");
+ctx.font = "15px sans-serif";
 console.log(screen.width, screen.height);
 
 let level = 1;
@@ -94,5 +95,6 @@ window.addEventListener("keydown", e => {
 	e.preventDefault();
 	ctx.clearRect(0, 0, screen.width, screen.height);
 	game.draw(ctx);
+	ctx.fillText(`Level: ${level}`, 5, 15);
 });
 

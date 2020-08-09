@@ -1,7 +1,7 @@
 export const TILE_W = 34;
 export const TILE_H = 34;
-export const numTilesX = 12;
-export const numTilesY = 12;
+export const numTilesX = 11;
+export const numTilesY = 11;
 
 export const tile = {
 	empty: 0,
@@ -10,6 +10,7 @@ export const tile = {
 	player: 3,
 	objective: 4,
 	wall: 5,
+	playerOk: 6,
 };
 
 export const keyCodes = {

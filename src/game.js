@@ -26,7 +26,7 @@ class Game {
 		this.sprites = Array();
 		for (const v of Object.values(g.tile)) {
 			// ignore player & empty tiles
-			if (v == 3 || v==0) {
+			if (v===0 || v===3 || v===6) {
 				this.sprites.push({});
 				continue;
 			}
@@ -53,9 +53,9 @@ class Game {
 			for (let x = 0; x < this.h; x++) {
 				let t = arr[y][x];
 
-				if (t == g.tile.player) {
+				if (t == g.tile.player || t == g.tile.playerOk) {
 					this.player = new Player(x, y);
-					t = g.tile.empty;
+					t = t === g.tile.player ? g.tile.empty : g.tile.objective;
 				}
 				
 				tileMap[y].push(new Tile(t));
