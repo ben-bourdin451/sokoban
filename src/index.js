@@ -23,18 +23,41 @@ console.log(screen.width, screen.height);
 let level = 1;
 game.loadLevel(level);
 
+function nextLevel() {
+	if (game.hasNextLevel(level)) {
+		level++;
+	} else {
+		level = 1;
+	}
+	game.loadLevel(level);
+}
+
+function prevLevel() {
+	if (level > 1) {
+		level--;
+		game.loadLevel(level);
+	}
+}
+
 window.addEventListener("keydown", e => {
 	if (game.isInMenu()) {
-		if (game.hasNextLevel(level)) {
-			level++;
-		} else {
-			level = 1;
-		}
-		game.loadLevel(level);
+		nextLevel();
 	}
 	
 	let d;
 	switch (e.keyCode) {
+	case g.keyCodes.R:
+		game.loadLevel(level);
+		break;
+
+	case g.keyCodes.N:
+		nextLevel();
+		break;
+
+	case g.keyCodes.P:
+		prevLevel();
+		break;
+
 	case g.keyCodes.W:
 	case g.keyCodes.K:
 	case g.keyCodes.ARROW_UP:

@@ -17,6 +17,9 @@ export const keyCodes = {
 	DELETE: 46,
 	ESCAPE: 27,
 	SPACEBAR: 32,
+	N: 78,
+	P: 80,
+	R: 82,
 
 	ARROW_LEFT: 37,
 	ARROW_UP: 38,
