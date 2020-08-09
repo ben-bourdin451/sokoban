@@ -1,13 +1,15 @@
 import * as g from './globals.js';
 import Player from './player.js';
 import Tile from './tile.js';
-import {nextPos} from './geo.js';
+import {nextPos, centerImg} from './geo.js';
 
 import levels from '../static/levels.json';
 import box from '../static/images/box.png';
 import boxOk from '../static/images/box_ok.png';
 import objective from '../static/images/objective.png';
 import wall from '../static/images/wall.png';
+
+import bravo from '../static/images/bravo.png';
 
 class Game {
 	constructor() {
@@ -17,6 +19,9 @@ class Game {
 		this.tileH = levels.tileHeight;
 		this.screenW = this.w*this.tileW;
 		this.screenH = this.h*this.tileH;
+
+		this.bravo = new Image(235, 88);
+		this.bravo.src = bravo;
 
 		this.sprites = Array();
 		for (const v of Object.values(g.tile)) {
@@ -40,13 +45,13 @@ class Game {
 			console.log(`level map not found`);
 			return;
 		}
-		
+
 		let arr = levels.maps[n];
 		let tileMap = Array();
 		for (let y = 0; y < this.w; y++) {
 			tileMap.push(Array());
 			for (let x = 0; x < this.h; x++) {
-				let t = arr.shift();
+				let t = arr[y][x];
 
 				if (t == g.tile.player) {
 					this.player = new Player(x, y);
@@ -58,7 +63,16 @@ class Game {
 		}
 
 		this.tileMap = tileMap;
+		this.levelCompleted = false;
 		this.loaded = true;
+	}
+
+	isInMenu() {
+		return this.levelCompleted || !this.loaded;
+	}
+
+	hasNextLevel(n) {
+		return !!levels.maps[n+1];
 	}
 
 	tick(d) {
@@ -85,26 +99,35 @@ class Game {
 				this.player.move(d);
 			}
 		}
+
+		// check winning condition
+		let objectives = this.tileMap.flatMap(row => row.filter(t => t.is(g.tile.objective)));
+		if (objectives.length <= 0) {
+			this.levelCompleted = true;
+		}
 	}
 
 	draw(ctx) {
-		ctx.clearRect(0, 0, this.screenW, this.screenH);
-
 		if (!this.loaded) {
 			console.log(`level not loaded`);
 			return;
 		}
-		
+
 		for (let y = 0; y < this.w; y++) {
 			for (let x = 0; x < this.h; x++) {
 
 				const t = this.tileMap[y][x];
 				if (!t.is(g.tile.empty)) {
-					ctx.drawImage(this.sprites[t.getType()], x*this.tileW, y*this.tileH, this.tileW, this.tileH);
+					ctx.drawImage(this.sprites[t.getType()], x*this.tileW, y*this.tileH);
 				}
 			}
 		}
 		this.player.draw(ctx);
+
+		if (this.levelCompleted) {
+			const [bx, by] = centerImg(this.screenW, this.screenH, this.bravo.width, this.bravo.height);
+			ctx.drawImage(this.bravo, bx, by);
+		}
 	}
 };
 

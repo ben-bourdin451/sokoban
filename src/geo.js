@@ -35,6 +35,10 @@ const bound = (x, max) => {
 	return x;
 };
 
-export const isColliding = (x, y, xx, yy) => {
-	return x == xx && y == yy;
+export const centerImg = (sw, sh, iw, ih) => {
+	return [center(sw, iw), center(sh, ih)];
+};
+
+const center = (s, i) => {
+	return s/2 - i/2;
 };

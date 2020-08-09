@@ -20,9 +20,19 @@ let screen = document.getElementById("screen");
 let ctx = screen.getContext("2d");
 console.log(screen.width, screen.height);
 
-game.loadLevel(2);
+let level = 1;
+game.loadLevel(level);
 
 window.addEventListener("keydown", e => {
+	if (game.isInMenu()) {
+		if (game.hasNextLevel(level)) {
+			level++;
+		} else {
+			level = 1;
+		}
+		game.loadLevel(level);
+	}
+	
 	let d;
 	switch (e.keyCode) {
 	case g.keyCodes.W:
@@ -59,6 +69,7 @@ window.addEventListener("keydown", e => {
 	}
 
 	e.preventDefault();
+	ctx.clearRect(0, 0, screen.width, screen.height);
 	game.draw(ctx);
 });
 
