@@ -4,7 +4,7 @@
   "description": "Sokoban game - by Ben",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "npm i && webpack-dev-server --open",
     "build": "webpack --mode production",
     "test": "jest"
   },

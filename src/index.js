@@ -1,7 +1,9 @@
 import * as g from './globals.js';
 import game from './game.js';
 import {nextPos, isColliding} from './geo.js';
+
 import '../static/css/style.css';
+import menu from '../static/images/menu.png';
 
 const FPS = 12;
 
@@ -39,6 +41,12 @@ function prevLevel() {
 		game.loadLevel(level);
 	}
 }
+
+const menuImg = new Image(408,408);
+menuImg.src = menu;
+window.onload = (e) => {
+	ctx.drawImage(menuImg, 0, 0, screen.width, screen.height);
+};
 
 window.addEventListener("keydown", e => {
 	if (game.isInMenu()) {
