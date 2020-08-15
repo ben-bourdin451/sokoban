@@ -5,13 +5,17 @@ import {nextPos, isColliding} from './geo.js';
 import '../static/css/style.css';
 import menu from '../static/images/menu.png';
 
-const FPS = 12;
+const urlParams = new URLSearchParams(window.location.search);
 
 function createCanvas() {
 	let el = document.createElement('canvas');
 	el.setAttribute("id", "screen");
 	el.setAttribute("width", g.TILE_W * g.numTilesX);
 	el.setAttribute("height", g.TILE_H * g.numTilesY);
+
+	if (urlParams.has("w")) {
+		el.setAttribute("style", `width: ${urlParams.get("w")}px;`);
+	}
 
 	return el;
 }
