@@ -1,5 +1,33 @@
+/* The game paints no background, so an iframe of it is transparent and the
+   embedding page shows through. The exception: browsers force an opaque white
+   backdrop when the embedder is dark and the embedded document has not opted
+   into dark, and that backdrop is the white mat around the board. Declaring
+   both schemes keeps the iframe transparent, so the game picks up whatever
+   theme the host is using. */
+:root {
+	color-scheme: light dark;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+
+body {
+	/* Centre the board when the frame is larger than the canvas. */
+	display: grid;
+	place-items: center;
+}
+
 canvas {
-	border: 1px solid #000000;
-	display: flex;
-	margin: auto;
+	/* The embedding page draws the frame. */
+	border: 0;
+
+	/* The frame is sized to the board, so there is no slack to absorb a
+	   narrow viewport. Scale down to fit rather than clipping. Deliberately
+	   not `image-rendering: pixelated`: it is a no-op at 1:1 and aliases
+	   badly when downscaling, which is the only case this applies to. */
+	max-width: 100%;
+	height: auto;
 }
